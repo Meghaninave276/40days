@@ -1,0 +1,235 @@
+/* ============================================
+   Card3D Component Styles - Electric Blue Theme
+   Color Palette: #2F2FE4, #162E93, #1A1953, #080616
+   ============================================ */
+
+/**
+ * Wrapper establishes the 3D perspective context.
+ */
+.card-3d-wrapper {
+  perspective: 1200px;
+ 
+}
+
+/**
+ * The card element with gradient border effect.
+ * Uses a pseudo-element for the animated gradient border,
+ * and a wrapper for the glassmorphism background.
+ */
+.card-3d {
+  position: relative;
+  background: linear-gradient(145deg, rgba(26, 25, 83, 0.95) 0%, rgba(8, 6, 22, 0.98) 100%);
+  border-radius: 20px;
+  overflow: visible;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  will-change: transform;
+
+  /* Inner glow border via box-shadow */
+  box-shadow:
+    0 0 0 1px rgba(47, 47, 228, 0.15),
+    0 8px 32px rgba(8, 6, 22, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  transform: perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
+
+  /* Smooth transition for reset */
+  transition:
+    transform 0.7s cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Animated gradient border pseudo-element */
+.card-3d::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 21px;
+  padding: 1.5px;
+  background: linear-gradient(
+    135deg,
+    rgba(47, 47, 228, 0.8) 0%,
+    rgba(22, 46, 147, 0.4) 35%,
+    rgba(26, 25, 83, 0.2) 65%,
+    rgba(47, 47, 228, 0.6) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.6;
+  transition: opacity 0.5s ease;
+}
+
+.card-3d--active::before {
+  opacity: 1;
+}
+
+/* Active state: remove CSS transitions for instant JS-driven updates */
+.card-3d--active {
+  transition: none;
+}
+
+/* ============================================
+   Image Section with Overlay Gradient
+   ============================================ */
+
+.card-3d__image-container {
+  overflow: hidden; /* KEEP clipping here */
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+/* Electric blue tint overlay on images */
+.card-3d__image-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 50%,
+    rgba(8, 6, 22, 0.85) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.card-3d__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(1.1) contrast(1.05);
+
+  /* Slight 3D push-forward for parallax depth */
+  transform: translateZ(20px) scale(1.05);
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card-3d--active .card-3d__image {
+  transform: translateZ(60px) scale(1.12);
+  filter: saturate(1.2) contrast(1.1);
+}
+
+/* ============================================
+   Content Section
+   ============================================ */
+
+.card-3d__content {
+  padding: 26px;
+  transform: translateZ(35px);
+  position: relative;
+  z-index: 2;
+}
+
+.card-3d__title {
+  margin: 0 0 12px;
+  font-size: 23px;
+  font-weight: 700;
+  color: var(--text-h);
+  transform: translateZ(12px);
+  letter-spacing: -0.3px;
+}
+
+/* Subtle electric underline on title */
+.card-3d__title::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  margin-top: 10px;
+  background: linear-gradient(90deg, var(--electric), transparent);
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+.card-3d--active .card-3d__title::after {
+  width: 70px;
+}
+
+.card-3d__description {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text);
+  transform: translateZ(6px);
+}
+
+/* ============================================
+   Electric Glow / Cursor Reflection Overlay
+   ============================================ */
+
+.card-3d__glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 3;
+
+  /* Electric blue radial gradient that follows cursor */
+  background: radial-gradient(
+    circle 280px at var(--glow-x, 50%) var(--glow-y, 50%),
+    rgba(47, 47, 228, 0.25) 0%,
+    rgba(22, 46, 147, 0.1) 35%,
+    transparent 70%
+  );
+
+  mix-blend-mode: screen;
+}
+
+.card-3d--active .card-3d__glow {
+  opacity: 1;
+}
+
+/* ============================================
+   Corner Accent Glows (Unique decorative element)
+   ============================================ */
+
+.card-3d::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(47, 47, 228, 0.06) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  z-index: 0;
+}
+
+.card-3d--active::after {
+  opacity: 1;
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+
+@media (max-width: 768px) {
+  .card-3d__image-container {
+    height: 190px;
+  }
+
+  .card-3d__content {
+    padding: 22px;
+  }
+
+  .card-3d__title {
+    font-size: 20px;
+  }
+
+  .card-3d__description {
+    font-size: 14px;
+  }
+}
+

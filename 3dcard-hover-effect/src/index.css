@@ -1,0 +1,137 @@
+/* ============================================
+   Electric Blue Theme - Global Styles
+   Color Palette: #2F2FE4, #162E93, #1A1953, #080616
+   ============================================ */
+
+:root {
+  /* Core palette */
+  --electric: #2f2fe4;
+  --deep-blue: #162e93;
+  --navy: #1a1953;
+  --void: #080616;
+
+  /* Derived colors */
+  --text: #a8b2d1;
+  --text-h: #e6f1ff;
+  --bg: var(--void);
+  --surface: var(--navy);
+  --border: rgba(47, 47, 228, 0.25);
+  --code-bg: rgba(22, 46, 147, 0.2);
+  --accent: var(--electric);
+  --accent-glow: rgba(47, 47, 228, 0.35);
+  --accent-border: rgba(47, 47, 228, 0.55);
+  --shadow:
+    rgba(8, 6, 22, 0.7) 0 20px 40px -5px,
+    rgba(47, 47, 228, 0.1) 0 8px 16px -4px;
+
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: 'Segoe UI', system-ui, Roboto, sans-serif;
+  --mono: 'Fira Code', ui-monospace, Consolas, monospace;
+
+  font: 17px/155% var(--sans);
+  letter-spacing: 0.2px;
+  color-scheme: dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    font-size: 16px;
+  }
+}
+
+/* Animated ambient background */
+body {
+  margin: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(47, 47, 228, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 80% 80%, rgba(22, 46, 147, 0.1) 0%, transparent 55%),
+    var(--void);
+  background-attachment: fixed;
+  overflow-x: hidden; /* OK */
+  overflow-y: auto;
+}
+
+#root {
+  width: 1280px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  border-inline: 1px solid var(--border);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Subtle grid pattern overlay */
+#root::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(47, 47, 228, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47, 47, 228, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: 0;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.5px;
+  margin: 32px 0;
+  background: linear-gradient(135deg, var(--text-h) 0%, var(--electric) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 38px;
+    margin: 20px 0;
+  }
+}
+
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.2px;
+  margin: 0 0 8px;
+}
+
+@media (max-width: 1024px) {
+  h2 {
+    font-size: 20px;
+  }
+}
+
+p {
+  margin: 0;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 140%;
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: var(--electric);
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+}
+

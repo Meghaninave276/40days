@@ -1,0 +1,169 @@
+/* ============================================
+   App Layout Styles - Electric Blue Theme
+   Color Palette: #2F2FE4, #162E93, #1A1953, #080616
+   ============================================ */
+
+.app {
+  padding: 56px 32px;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header Section with animated underline */
+.app__header {
+  text-align: center;
+  margin-bottom: 64px;
+  position: relative;
+}
+
+.app__header h1 {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.2;
+
+
+
+
+ 
+
+  
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow:
+    0 4px 20px rgba(0,0,0,0.5),
+    0 0 10px rgba(255,255,255,0.1);
+}
+
+/* Animated gradient text effect */
+.app__header h1 {
+  background: linear-gradient(
+    135deg,
+    #e6f1ff 0%,
+    #2f2fe4 50%,
+    #162e93 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: gradientShift 6s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.app__header p {
+  font-size: 18px;
+  color: var(--text);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Decorative line under header */
+.app__header::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  margin: 28px auto 0;
+  background: linear-gradient(90deg, transparent, var(--electric), transparent);
+  border-radius: 3px;
+  opacity: 0.6;
+}
+
+/* Card Grid */
+.app__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 44px;
+  max-width: 1320px;
+  margin: 0 auto;
+  width: 100%;
+  flex: 1;
+  align-content: start;
+}
+
+/* Footer */
+.app__footer {
+  text-align: center;
+  margin-top: 64px;
+  padding-top: 32px;
+  position: relative;
+}
+
+.app__footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+
+.app__footer p {
+  font-size: 13px;
+  color: var(--text);
+  opacity: 0.6;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .app {
+    padding: 40px 24px;
+  }
+
+  .app__header {
+    margin-bottom: 48px;
+  }
+
+ .app__header h1 {
+  font-size: 58px;
+  line-height: 1.2;   /* ADD THIS */
+  margin-top: 10px;   /* ADD THIS */
+}
+
+  .app__grid {
+    gap: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app__header h1 {
+    font-size: 34px;
+  }
+
+  .app__header p {
+    font-size: 16px;
+  }
+
+  .app__grid {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+    gap: 32px;
+  }
+
+  .app__footer {
+    margin-top: 48px;
+  }
+}
+
